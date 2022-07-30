@@ -1,3 +1,4 @@
+import 'dart:math';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/events.dart';
@@ -11,15 +12,14 @@ import 'package:flame/components.dart';
 import 'package:flutter/services.dart';
 import 'package:gamejam/classes/Bullet.dart';
 import 'package:gamejam/classes/ScoreBoard.dart';
+import 'package:gamejam/classes/astroid.dart';
 
 import 'classes/Spaceship.dart';
 import 'classes/Background.dart';
 
 import 'classes/Endpoint.dart';
 
-
 class SpaceShooterGame extends FlameGame with HasCollisionDetection {
-
   //Declare variables
   late SpaceShip player;
   late EndPoint endPoint;
@@ -28,11 +28,9 @@ class SpaceShooterGame extends FlameGame with HasCollisionDetection {
 
   Background _background = Background();
 
-
   //Sets it to debug mode or not - makes it display the hit boxes and coordinates
   @override
   bool get debugMode => true;
-
 
   //Increase the display on the scoreboard
   void increaseScore() {
@@ -42,7 +40,6 @@ class SpaceShooterGame extends FlameGame with HasCollisionDetection {
   //Called once when the game starts - Used to load everything
   @override
   Future<void> onLoad() async {
-    
     await super.onLoad();
 
     await add(_background);
@@ -50,7 +47,7 @@ class SpaceShooterGame extends FlameGame with HasCollisionDetection {
     camera.viewport = FixedResolutionViewport(Vector2(800, 600));
 
     //Define variables
-   player = SpaceShip()
+    player = SpaceShip()
       ..position = size / 2
       ..width = 50
       ..height = 50
@@ -61,15 +58,24 @@ class SpaceShooterGame extends FlameGame with HasCollisionDetection {
       ..position = Vector2(size.x - 50, 50)
       ..width = 50
       ..height = 50
-      ..anchor=Anchor.center;
+      ..anchor = Anchor.center;
 
-  //Add the components into the game
+    //Add the components into the game
     add(ScreenHitbox());
     add(player);
     add(endPoint);
     add(scoreBoard);
+    add(astroid()
+      ..vx = Random(100).nextDouble()
+      ..vy = Random(100).nextDouble());
 
-    add(Bullet()..vx = 10..vy=0..spriteFile="assets/images/enemyShot1.png"..position=Vector2(300,400)..width=10..height=10);
+    add(Bullet()
+      ..vx = 10
+      ..vy = 0
+      ..spriteFile = "assets/images/enemyShot1.png"
+      ..position = Vector2(300, 400)
+      ..width = 10
+      ..height = 10);
 
     //  camera.followComponent(player);
   }
@@ -77,10 +83,8 @@ class SpaceShooterGame extends FlameGame with HasCollisionDetection {
   //Called every update with the deltatime between it and the last update
   @override
   void update(double dt) {
-
-   
     super.update(dt);
-     //Just using this for the key inputs
+    //Just using this for the key inputs
     if (RawKeyboard.instance.keysPressed.contains(LogicalKeyboardKey.keyA)) {
       player.left = true;
     } else {
@@ -103,10 +107,6 @@ class SpaceShooterGame extends FlameGame with HasCollisionDetection {
     }
   }
 }
-
-
-
-
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
