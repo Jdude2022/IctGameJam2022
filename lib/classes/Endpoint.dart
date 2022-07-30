@@ -4,7 +4,7 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
     import 'package:flutter/material.dart';
 
-class EndPoint extends PositionComponent with CollisionCallbacks, HasGameRef{
+class EndPoint extends PositionComponent{
   static final _paint = Paint()..color = Colors.red;
   
 

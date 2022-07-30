@@ -9,6 +9,7 @@ import 'package:flame/game.dart';
 
 import 'package:flame/components.dart';
 import 'package:flutter/services.dart';
+import 'package:gamejam/classes/Bullet.dart';
 import 'package:gamejam/classes/ScoreBoard.dart';
 
 import 'classes/Spaceship.dart';
@@ -67,6 +68,8 @@ class SpaceShooterGame extends FlameGame with HasCollisionDetection {
     add(player);
     add(endPoint);
     add(scoreBoard);
+
+    add(Bullet()..vx = 10..vy=0..spriteFile="assets/images/enemyShot1.png"..position=Vector2(300,400)..width=10..height=10);
 
     //  camera.followComponent(player);
   }

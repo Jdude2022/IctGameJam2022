@@ -23,7 +23,7 @@ import 'package:gamejam/main.dart';
       Future<void> onLoad() async {
         super.onLoad();
         sprite = await gameRef.loadSprite('spaceshipver1.png');
-        add(RectangleHitbox(size:size));
+        add(CircleHitbox(radius: (size.x/2)-5, anchor: Anchor.topLeft, position: Vector2(10, 5)));
   
       }
 
