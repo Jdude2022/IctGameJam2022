@@ -4,8 +4,9 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
     import 'package:flutter/material.dart';
 import 'package:gamejam/classes/Endpoint.dart';
+import 'package:gamejam/main.dart';
     
-    class SpaceShip extends SpriteComponent with HasGameRef, CollisionCallbacks{
+    class SpaceShip extends SpriteComponent with HasGameRef<SpaceShooterGame>, CollisionCallbacks{
       SpaceShip() : super(size: Vector2.all(100.0));
 
       static final _paint = Paint()..color = Colors.red;
@@ -55,11 +56,31 @@ import 'package:gamejam/classes/Endpoint.dart';
         if(!up) {
           moveSpeed = 10;
         }
+
+
       position.x+=vx*dt;
       position.y+=vy*dt;
+
+      if(position.y+size.y/2>=gameRef.size.y) {
+        position.y = gameRef.size.y-size.y/2;
+      }
+      else if(position.y<=size.y/2) {
+        position.y = size.y/2;
+      }
+
+      if(position.x+size.x/2>=gameRef.size.x) {
+        position.x = gameRef.size.x-size.x/2;
+      }
+      else if(position.x <= size.x/2) {
+        position.x = size.x/2;
+      }
+      
+  
+    
       vx*=0.98;
       vy*=0.98; 
 
+      
 
       //Check collisions
 
@@ -81,10 +102,11 @@ import 'package:gamejam/classes/Endpoint.dart';
     // print(other);
     if (other is ScreenHitbox) {
       //...
-   print("collided with screen");
+  //  print("collided with screen");
     } 
     else if (other is EndPoint) {
       other.move();
+      gameRef.increaseScore();
     }
     // else if (other is YourOtherComponent) {
     //   //...
