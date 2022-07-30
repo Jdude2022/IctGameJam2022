@@ -73,10 +73,26 @@ class SpaceShip extends SpriteAnimationComponent
       }
       position.x += vx * dt;
       position.y += vy * dt;
-      vx *= 0.98;
-      vy *= 0.98;
 
       //Check collisions
+      if(position.y+size.y/2>=gameRef.size.y) {
+        position.y = gameRef.size.y-size.y/2;
+      }
+      else if(position.y<=size.y/2) {
+        position.y = size.y/2;
+      }
+
+      if(position.x+size.x/2>=gameRef.size.x) {
+        position.x = gameRef.size.x-size.x/2;
+      }
+      else if(position.x <= size.x/2) {
+        position.x = size.x/2;
+      }
+      
+  
+    //Decelerate
+      vx*=0.98;
+      vy*=0.98; 
     }
 
     // @override
