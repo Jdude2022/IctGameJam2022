@@ -11,13 +11,13 @@ class EndPoint extends PositionComponent with CollisionCallbacks, HasGameRef{
      @override
       Future<void> onLoad() async {
         super.onLoad();
-        add(CircleHitbox());
+        add(CircleHitbox(radius: size.x, anchor: Anchor.center));
   
       }
 
   @override
   void render(Canvas canvas) {
-    canvas.drawCircle(Offset.zero, size.length, _paint);
+    canvas.drawCircle(Offset.zero, size.x, _paint);
   }
 
   void move(){

@@ -22,7 +22,7 @@ import 'package:gamejam/classes/Endpoint.dart';
       Future<void> onLoad() async {
         super.onLoad();
         sprite = await gameRef.loadSprite('spaceshipver1.png');
-        add(RectangleHitbox(size:Vector2.all(100)));
+        add(RectangleHitbox(size:size));
   
       }
 

@@ -22,6 +22,10 @@ class SpaceShooterGame extends FlameGame with HasCollisionDetection {
   bool left = false, right = false, up = false, down = false;
 
   Background _background = Background();
+
+@override
+  bool get debugMode => true;
+
 // Handle all the key events
 
   // @override
@@ -73,7 +77,8 @@ class SpaceShooterGame extends FlameGame with HasCollisionDetection {
     endPoint = EndPoint()
       ..position = Vector2(size.x - 50, 50)
       ..width = 50
-      ..height = 50;
+      ..height = 50
+      ..anchor=Anchor.center;
 
     add(player);
     add(SpaceShip()
