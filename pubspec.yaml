@@ -55,7 +55,7 @@ flutter:
   fonts:
     - family: Pixel Operator Mono
       fonts:
-      - assets: assets/fonts/PixelOperatorMono.ttf
+      - asset: assets/fonts/PixelOperatorMono.ttf
   assets:
     # - assets/images/spaceshipver1.png
     # - assets/images/space_space.png
