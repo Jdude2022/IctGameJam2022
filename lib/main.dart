@@ -30,7 +30,7 @@ class SpaceShooterGame extends FlameGame with HasCollisionDetection {
 
   //Sets it to debug mode or not - makes it display the hit boxes and coordinates
   @override
-  bool get debugMode => true;
+  bool get debugMode => false;
 
   //Increase the display on the scoreboard
   void increaseScore() {
