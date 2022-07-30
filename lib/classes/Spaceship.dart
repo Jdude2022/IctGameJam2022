@@ -1,9 +1,11 @@
     import 'dart:math';
 
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
     import 'package:flutter/material.dart';
+import 'package:gamejam/classes/Endpoint.dart';
     
-    class SpaceShip extends SpriteComponent with HasGameRef{
+    class SpaceShip extends SpriteComponent with HasGameRef, CollisionCallbacks{
       SpaceShip() : super(size: Vector2.all(100.0));
 
       static final _paint = Paint()..color = Colors.red;
@@ -20,7 +22,8 @@ import 'package:flame/components.dart';
       Future<void> onLoad() async {
         super.onLoad();
         sprite = await gameRef.loadSprite('spaceshipver1.png');
-      
+        add(RectangleHitbox(size:Vector2.all(100)));
+  
       }
 
       @override
@@ -57,7 +60,9 @@ import 'package:flame/components.dart';
       vx*=0.98;
       vy*=0.98; 
 
-      
+
+      //Check collisions
+
       }
 
       @override
@@ -66,4 +71,35 @@ import 'package:flame/components.dart';
         // canvas.drawRect(size.toRect(), _paint);
         
       }
+
+
+ @override
+  void onCollision(Set<Vector2> points, PositionComponent other) {
+    // super.onCollision(points, other);
+
+    
+    // print(other);
+    if (other is ScreenHitbox) {
+      //...
+   print("collided with screen");
+    } 
+    else if (other is EndPoint) {
+      other.move();
+    }
+    // else if (other is YourOtherComponent) {
+    //   //...
+    // }
+  }
+
+  @override
+  void onCollisionEnd(PositionComponent other) {
+    super.onCollisionEnd(other);
+    if (other is ScreenHitbox) {
+      //...
+    } 
+    // else if (other is YourOtherComponent) {
+    //   //...
+    // }
+  }
+
     }
