@@ -108,7 +108,7 @@ class SpaceShip extends SpriteAnimationComponent
       // print(other);
       if (other is ScreenHitbox) {
         //...
-        print("collided with screen");
+        // print("collided with screen");
       } else if (other is EndPoint) {
         other.move();
         gameRef.increaseScore();
