@@ -51,7 +51,7 @@ class SpaceShip extends SpriteAnimationComponent
   }
     @override
     void update(double dt) {
-      //super.update(dt);
+      super.update(dt);
       if (left) {
         angle -= turnSpeed * dt;
       } else if (right) {
