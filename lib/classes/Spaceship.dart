@@ -3,7 +3,7 @@
 import 'package:flame/components.dart';
     import 'package:flutter/material.dart';
     
-    class SpaceShip extends PositionComponent{
+    class SpaceShip extends SpriteComponent with HasGameRef{
       SpaceShip() : super(size: Vector2.all(100.0));
 
       static final _paint = Paint()..color = Colors.red;
@@ -11,15 +11,15 @@ import 'package:flame/components.dart';
       bool up = false, down=false, left=false, right=false;
       double turnSpeed = 1;
       double moveSpeed = 10;
-      double maxSpeed = 500;
+      double maxSpeed = 300;
       double vx = 0,vy=0;
-      double acceleration = 5;
+      double acceleration = 3;
 
 
       @override
       Future<void> onLoad() async {
         super.onLoad();
-        // sprite = await gameRef.loadSprite('idle.png');
+        sprite = await gameRef.loadSprite('spaceshipver1.png');
       
       }
 
@@ -57,15 +57,13 @@ import 'package:flame/components.dart';
       vx*=0.98;
       vy*=0.98; 
 
-        // if(left) transform.angle-=turnSpeed*dt;
-        // if(right) transform.angle+=turnSpeed*dt;
-        // if(up) position.y+=moveSpeed*dt;
-        //  position.y+=moveSpeed*dt;
       
       }
 
       @override
       void render(Canvas canvas) {
-        canvas.drawRect(size.toRect(), _paint);
+        super.render(canvas);
+        // canvas.drawRect(size.toRect(), _paint);
+        
       }
     }

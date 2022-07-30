@@ -84,7 +84,8 @@ class SpaceShooterGame extends FlameGame with KeyboardEvents{
         ..position = size / 2
         ..width = 50
         ..height = 50
-        ..anchor = Anchor.center;
+        ..anchor = Anchor.center
+        ..angle=radians(45);
 
     add(player);
     add(SpaceShip()..position = Vector2(0,size.y-100)..width=50..height=100);
