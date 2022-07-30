@@ -91,7 +91,7 @@ class SpaceShooterGame extends FlameGame with KeyboardEvents{
     add(EndPoint()..position=Vector2(size.x-50,50)..width=50..height=50);
 
 
-    camera.followComponent(player);
+  //  camera.followComponent(player);
 
   
   }

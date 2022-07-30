@@ -11,7 +11,9 @@ import 'package:flame/components.dart';
       bool up = false, down=false, left=false, right=false;
       double turnSpeed = 1;
       double moveSpeed = 10;
+      double maxSpeed = 500;
       double vx = 0,vy=0;
+      double acceleration = 5;
 
 
       @override
@@ -31,18 +33,29 @@ import 'package:flame/components.dart';
           angle+=turnSpeed*dt;
         } 
         else if(up) {
-          vx = cos(angle);
-          vy = sin(angle);
+          
+          vx = cos(angle) * moveSpeed;
+          vy = sin(angle) * moveSpeed;
+
+          if(moveSpeed<maxSpeed) {
+            moveSpeed+=acceleration;
+          }
+          else {
+            moveSpeed = maxSpeed;
+          }
        
           
         } 
         else if(down) {
 
         }    
-   position.x+=vx;
-        position.y+=vy;
-        vx*=0.99;
-        vy*=0.99; 
+        if(!up) {
+          moveSpeed = 10;
+        }
+      position.x+=vx*dt;
+      position.y+=vy*dt;
+      vx*=0.98;
+      vy*=0.98; 
 
         // if(left) transform.angle-=turnSpeed*dt;
         // if(right) transform.angle+=turnSpeed*dt;
