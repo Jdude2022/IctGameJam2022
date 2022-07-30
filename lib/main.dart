@@ -38,35 +38,37 @@ class SpaceShooterGame extends FlameGame with KeyboardEvents{
     RawKeyEvent event,
     Set<LogicalKeyboardKey> keysPressed,
   ) {
-    final isKeyDown = event is RawKeyDownEvent;
     
 
-    final isSpace = keysPressed.contains(LogicalKeyboardKey.space);
-
-    if(keysPressed.contains(LogicalKeyboardKey.keyA)){
-      player.angle-=0.1;
+    if(event.isKeyPressed(LogicalKeyboardKey.keyA)) {
+      player.left=true;
     }
-    if(keysPressed.contains(LogicalKeyboardKey.keyD)) {
-
+    else {
+      player.left=false;
     }
-    if(keysPressed.contains(LogicalKeyboardKey.keyW)) {
-
+    if(event.isKeyPressed(LogicalKeyboardKey.keyD)) {
+      player.right=true;
     }
-    if(keysPressed.contains(LogicalKeyboardKey.keyS)) {
-
+    else{
+      player.right=false;
+    }
+    if(event.isKeyPressed(LogicalKeyboardKey.keyW)) {
+       player.up=true;
+    }
+    else {
+      player.up=false;
+    }
+    if(event.isKeyPressed(LogicalKeyboardKey.keyS)) {
+      player.down=true;
+    }
+    else {
+      player.down=false;
     }
 
-    if (isSpace && isKeyDown) {
-      if (keysPressed.contains(LogicalKeyboardKey.altLeft) ||
-          keysPressed.contains(LogicalKeyboardKey.altRight)) {
-            
-        
-      } else {
-        player.transform.angle+=1;
-      }
-      return KeyEventResult.handled;
-    }
-    return KeyEventResult.ignored;
+
+    return KeyEventResult.handled;
+
+
   }
 
 
