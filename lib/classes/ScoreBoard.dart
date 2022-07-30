@@ -24,7 +24,7 @@ class Scoreboard extends TextComponent with HasGameRef{
 
   @override
   void render(Canvas canvas) {
-textPaint.render(canvas, "Score: $score", Vector2(gameRef.size.x/3, 10));
+    textPaint.render(canvas, "Score: $score", Vector2(gameRef.size.x/3, 10));
   }
 
 }

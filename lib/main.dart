@@ -9,6 +9,7 @@ import 'package:flame/game.dart';
 
 import 'package:flame/components.dart';
 import 'package:flutter/services.dart';
+import 'package:gamejam/classes/Bullet.dart';
 import 'package:gamejam/classes/ScoreBoard.dart';
 
 import 'classes/Spaceship.dart';
@@ -18,6 +19,8 @@ import 'classes/Endpoint.dart';
 
 
 class SpaceShooterGame extends FlameGame with HasCollisionDetection {
+
+  //Declare variables
   late SpaceShip player;
   late EndPoint endPoint;
   Scoreboard scoreBoard = Scoreboard();
@@ -25,27 +28,29 @@ class SpaceShooterGame extends FlameGame with HasCollisionDetection {
 
   Background _background = Background();
 
-@override
+
+  //Sets it to debug mode or not - makes it display the hit boxes and coordinates
+  @override
   bool get debugMode => true;
 
+
+  //Increase the display on the scoreboard
   void increaseScore() {
     scoreBoard.score++;
   }
 
-  //Called once when the game starts
-
+  //Called once when the game starts - Used to load everything
   @override
   Future<void> onLoad() async {
     
     await super.onLoad();
 
     await add(_background);
-  
+    //Set the game screen to a consistent size on any monitor
     camera.viewport = FixedResolutionViewport(Vector2(800, 600));
 
- add(ScreenHitbox());
-
-    player = SpaceShip()
+    //Define variables
+   player = SpaceShip()
       ..position = size / 2
       ..width = 50
       ..height = 50
@@ -58,17 +63,25 @@ class SpaceShooterGame extends FlameGame with HasCollisionDetection {
       ..height = 50
       ..anchor=Anchor.center;
 
+  //Add the components into the game
+    add(ScreenHitbox());
     add(player);
-
     add(endPoint);
     add(scoreBoard);
 
+    add(Bullet()..vx = 10..vy=0..spriteFile="assets/images/enemyShot1.png"..position=Vector2(300,400)..width=10..height=10);
+
     //  camera.followComponent(player);
   }
+
+  //Called every update with the deltatime between it and the last update
   @override
   void update(double dt) {
+
+   
     super.update(dt);
-      if (RawKeyboard.instance.keysPressed.contains(LogicalKeyboardKey.keyA)) {
+     //Just using this for the key inputs
+    if (RawKeyboard.instance.keysPressed.contains(LogicalKeyboardKey.keyA)) {
       player.left = true;
     } else {
       player.left = false;
@@ -98,6 +111,7 @@ class SpaceShooterGame extends FlameGame with HasCollisionDetection {
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
+  //This sets it up for mobile devices to be landscape and full screen
   Flame.device.setLandscape();
   Flame.device.fullScreen();
   runApp(GameWidget(game: SpaceShooterGame()));

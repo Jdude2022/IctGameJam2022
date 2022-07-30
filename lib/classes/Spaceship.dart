@@ -27,6 +27,7 @@ class SpaceShip extends SpriteAnimationComponent
   Future<void> onLoad() async {
    
     _loadAnimations().then((_) => {animation = _flyingAnimation});
+     add(CircleHitbox(radius: (size.x/2)-5, anchor: Anchor.topLeft, position: Vector2(10, 5)));
  super.onLoad();
     //var spritesheet = await images.load('shipSheet.png');
 
