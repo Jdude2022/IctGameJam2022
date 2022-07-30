@@ -21,7 +21,7 @@ class SpaceShip extends SpriteAnimationComponent
   double acceleration = 3;
 
   SpriteAnimationComponent shipAnimation = SpriteAnimationComponent();
-  final double _animationSpeed = 1;
+  final double _animationSpeed = 0.1;
   late final SpriteAnimation _flyingAnimation;
   @override
   Future<void> onLoad() async {
