@@ -6,9 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:gamejam/classes/Endpoint.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/sprite.dart';
+import 'package:gamejam/main.dart';
 
 class SpaceShip extends SpriteAnimationComponent
-    with HasGameRef, CollisionCallbacks {
+    with HasGameRef<SpaceShooterGame>, CollisionCallbacks {
   SpaceShip() : super(size: Vector2.all(100.0));
 
   static final _paint = Paint()..color = Colors.red;
@@ -94,6 +95,7 @@ class SpaceShip extends SpriteAnimationComponent
         print("collided with screen");
       } else if (other is EndPoint) {
         other.move();
+        gameRef.increaseScore();
       }
       // else if (other is YourOtherComponent) {
       //   //...
