@@ -25,9 +25,9 @@ class SpaceShip extends SpriteAnimationComponent
   late final SpriteAnimation _flyingAnimation;
   @override
   Future<void> onLoad() async {
-    super.onLoad();
+   
     _loadAnimations().then((_) => {animation = _flyingAnimation});
-
+ super.onLoad();
     //var spritesheet = await images.load('shipSheet.png');
 
     // SpriteAnimationData spriteData = SpriteAnimationData.sequenced(
@@ -46,11 +46,12 @@ class SpaceShip extends SpriteAnimationComponent
       image: await gameRef.images.load('shipSheet.png'),
       srcSize: Vector2(32.0, 32.0),
     );
-    _flyingAnimation =
+     _flyingAnimation =
         spriteSheet.createAnimation(row: 0, stepTime: _animationSpeed, to: 3);
-
+  }
     @override
     void update(double dt) {
+      //super.update(dt);
       if (left) {
         angle -= turnSpeed * dt;
       } else if (right) {
@@ -76,11 +77,11 @@ class SpaceShip extends SpriteAnimationComponent
       //Check collisions
     }
 
-    @override
-    void render(Canvas canvas) {
-      super.render(canvas);
-      // canvas.drawRect(size.toRect(), _paint);
-    }
+    // @override
+    // void render(Canvas canvas) {
+    //   //super.render(canvas);
+    //   // canvas.drawRect(size.toRect(), _paint);
+    // }
 
     @override
     void onCollision(Set<Vector2> points, PositionComponent other) {
@@ -109,4 +110,4 @@ class SpaceShip extends SpriteAnimationComponent
       // }
     }
   }
-}
+
