@@ -12,7 +12,7 @@ class Scoreboard extends TextComponent with HasGameRef{
       final TextPaint textPaint = TextPaint(
        style: TextStyle(
       fontSize: 48.0,
-      fontFamily: 'Awesome Font',
+      fontFamily: 'Pixel Operator Mono',
       ),
       );
      @override
