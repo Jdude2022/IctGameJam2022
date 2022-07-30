@@ -4,6 +4,7 @@ import 'package:flame/collisions.dart';
 import 'package:flame/events.dart';
 import 'package:flame/experimental.dart';
 import 'package:flame/flame.dart';
+import 'package:flame_splash_screen/flame_splash_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flame/game.dart';
@@ -108,11 +109,44 @@ class SpaceShooterGame extends FlameGame with HasCollisionDetection {
   }
 }
 
+class MyGame extends StatelessWidget {
+  const MyGame({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+   return GameWidget(game: SpaceShooterGame());
+  }
+}
+
+
+class StartScreen extends StatelessWidget {
+  const StartScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return FlameSplashScreen(
+  theme: FlameSplashTheme.dark,
+    showAfter: (BuildContext context) {
+    return Text("Space Game");
+  },
+  onFinish: (BuildContext context) => Navigator.push(context, MaterialPageRoute(builder: (context) => const MyGame())),
+  );
+  }
+}
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   //This sets it up for mobile devices to be landscape and full screen
   Flame.device.setLandscape();
   Flame.device.fullScreen();
-  runApp(GameWidget(game: SpaceShooterGame()));
+ 
+  //runApp(GameWidget(game: SpaceShooterGame()));
+  runApp(const MaterialApp(
+    title: 'Navigation Basics',
+    home: StartScreen(),
+  ));
+  //runApp(GameWidget(game: SpaceShooterGame()));
 }
+
+ 

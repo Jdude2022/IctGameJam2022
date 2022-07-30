@@ -14,6 +14,7 @@ class astroid extends SpriteAnimationComponent
   double vx = 0;
   double vy = 0;
 
+
   SpriteAnimationComponent astroidAnimation = SpriteAnimationComponent();
   final double _animationSpeed = 0.1;
   late final SpriteAnimation _astroidAnimation;
@@ -44,5 +45,7 @@ class astroid extends SpriteAnimationComponent
     super.update(dt);
     position.x += vx * dt * 100;
     position.y += vy * dt * 100;
+    if(position.x>400)
+    gameRef.remove(this);
   }
 }
