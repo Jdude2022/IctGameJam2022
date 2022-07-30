@@ -41,8 +41,8 @@ import 'package:flame/components.dart';
         }    
    position.x+=vx;
         position.y+=vy;
-        vx*=0.9;
-        vy*=0.9; 
+        vx*=0.99;
+        vy*=0.99; 
 
         // if(left) transform.angle-=turnSpeed*dt;
         // if(right) transform.angle+=turnSpeed*dt;
