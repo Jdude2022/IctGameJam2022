@@ -38,11 +38,6 @@ class SpaceShooterGame extends FlameGame
   //Increase the display on the scoreboard
   void increaseScore() {
     scoreBoard.score++;
-<<<<<<< HEAD
-    pauseEngine();
-=======
-    
->>>>>>> eed400628a1ed04a9d4aebb26005bbcfcf6ddff9
   }
 
   //Key events
@@ -56,10 +51,7 @@ class SpaceShooterGame extends FlameGame
     final isSpace = keysPressed.contains(LogicalKeyboardKey.space);
 
     if (isSpace && isKeyDown) {
-<<<<<<< HEAD
-      if (paused) paused = false;
-=======
-      if(paused) {
+      if (paused) {
         //Restart the game
 
         overlays.remove("PauseMenu");
@@ -69,9 +61,8 @@ class SpaceShooterGame extends FlameGame
         player.vx = 0;
         player.vy = 0;
 
-        paused=false;
+        paused = false;
       }
->>>>>>> eed400628a1ed04a9d4aebb26005bbcfcf6ddff9
       return KeyEventResult.handled;
     }
     return KeyEventResult.ignored;
@@ -187,6 +178,4 @@ void main() {
     home: StartScreen(),
   ));
   //runApp(GameWidget(game: SpaceShooterGame()));
-
-
 }
