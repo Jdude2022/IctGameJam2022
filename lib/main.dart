@@ -67,7 +67,7 @@ class SpaceShooterGame extends FlameGame
         paused = false;
 
       } else {
-            FlameAudio.play("sound_test.mp3");
+            //FlameAudio.play("sound_test.mp3");
 
       }
 
