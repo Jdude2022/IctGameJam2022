@@ -35,7 +35,7 @@ class SpaceShooterGame extends FlameGame
 
   //Sets it to debug mode or not - makes it display the hit boxes and coordinates
   @override
-  bool get debugMode => true;
+  bool get debugMode => false;
 
   //Increase the display on the scoreboard
   void increaseScore() {
@@ -118,8 +118,16 @@ class SpaceShooterGame extends FlameGame
       ..height = 10);
 
     //  camera.followComponent(player);
-    FlameAudio.bgm.initialize();
+     FlameAudio.bgm.initialize();
+    Future.delayed(const Duration(milliseconds: 1000), () {
+
+// Here you can write your code
+
+ 
     FlameAudio.bgm.play("backgroundmusic.wav");
+
+});
+   
   }
 
   double timeToCreateAstroid = Random().nextInt(4) + 5;
