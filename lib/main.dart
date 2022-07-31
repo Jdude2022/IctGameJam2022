@@ -19,8 +19,9 @@ import 'classes/Spaceship.dart';
 import 'classes/Background.dart';
 
 import 'classes/Endpoint.dart';
+import 'components/StartComponent.dart';
 
-class SpaceShooterGame extends FlameGame with HasCollisionDetection {
+class SpaceShooterGame extends FlameGame with HasCollisionDetection, KeyboardEvents {
   //Declare variables
   late SpaceShip player;
   late EndPoint endPoint;
@@ -31,12 +32,36 @@ class SpaceShooterGame extends FlameGame with HasCollisionDetection {
 
   //Sets it to debug mode or not - makes it display the hit boxes and coordinates
   @override
-  bool get debugMode => false;
+  bool get debugMode => true;
 
   //Increase the display on the scoreboard
   void increaseScore() {
     scoreBoard.score++;
+    
+
+    
+    pauseEngine();
+    
   }
+
+
+  //Key events
+    @override
+  KeyEventResult onKeyEvent(
+    RawKeyEvent event,
+    Set<LogicalKeyboardKey> keysPressed,
+  ) {
+    final isKeyDown = event is RawKeyDownEvent;
+
+    final isSpace = keysPressed.contains(LogicalKeyboardKey.space);
+
+    if (isSpace && isKeyDown) {
+      if(paused)paused=false;
+      return KeyEventResult.handled;
+    }
+    return KeyEventResult.ignored;
+  }
+
 
   //Called once when the game starts - Used to load everything
   @override
@@ -109,30 +134,9 @@ class SpaceShooterGame extends FlameGame with HasCollisionDetection {
   }
 }
 
-class MyGame extends StatelessWidget {
-  const MyGame({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-   return GameWidget(game: SpaceShooterGame());
-  }
-}
 
 
-class StartScreen extends StatelessWidget {
-  const StartScreen({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return FlameSplashScreen(
-  theme: FlameSplashTheme.dark,
-    showAfter: (BuildContext context) {
-    return Text("Space Game");
-  },
-  onFinish: (BuildContext context) => Navigator.push(context, MaterialPageRoute(builder: (context) => const MyGame())),
-  );
-  }
-}
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
