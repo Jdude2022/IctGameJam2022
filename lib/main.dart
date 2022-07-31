@@ -33,7 +33,7 @@ class SpaceShooterGame extends FlameGame
 
   //Sets it to debug mode or not - makes it display the hit boxes and coordinates
   @override
-  bool get debugMode => false;
+  bool get debugMode => true;
 
   //Increase the display on the scoreboard
   void increaseScore() {

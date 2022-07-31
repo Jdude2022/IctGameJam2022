@@ -21,13 +21,13 @@ class astroid extends SpriteAnimationComponent
   @override
   Future<void> onLoad() async {
     _loadAnimations().then((_) => {animation = _astroidAnimation});
-    add(CircleHitbox(
-        radius: (size.x / 2) - 5,
-        anchor: Anchor.topLeft,
-        position: Vector2(10, 5)));
+    // add(CircleHitbox(
+    //     radius: (size.x / 2) - 5,
+    //     anchor: Anchor.topLeft,
+    //     position: Vector2(10, 5)));
     super.onLoad();
 
-    add(RectangleHitbox(size: size));
+    add(CircleHitbox());
   }
 
   Future<void> _loadAnimations() async {
