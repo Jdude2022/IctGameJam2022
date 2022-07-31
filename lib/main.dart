@@ -20,6 +20,7 @@ import 'classes/Background.dart';
 
 import 'classes/Endpoint.dart';
 import 'components/StartComponent.dart';
+import 'package:flame_audio/flame_audio.dart';
 
 class SpaceShooterGame extends FlameGame
     with HasCollisionDetection, KeyboardEvents {
@@ -62,6 +63,9 @@ class SpaceShooterGame extends FlameGame
         player.vy = 0;
 
         paused = false;
+      }
+      else {
+        FlameAudio.play("assets/audio/sound_test.mp3");
       }
       return KeyEventResult.handled;
     }
