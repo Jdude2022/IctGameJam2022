@@ -38,13 +38,6 @@ class SpaceShooterGame extends FlameGame
   //Increase the display on the scoreboard
   void increaseScore() {
     scoreBoard.score++;
-    for (int i = 0; i < scoreBoard.score; i++) {
-      add(astroid()
-        ..position = Vector2(
-            Random(400).nextDouble() * 200, Random(400).nextDouble() * 200)
-        ..vx = Random(100).nextDouble() * 2
-        ..vy = Random(100).nextDouble() * 2);
-    }
     pauseEngine();
   }
 
@@ -108,10 +101,36 @@ class SpaceShooterGame extends FlameGame
     //  camera.followComponent(player);
   }
 
+  double timeToCreateAstroid = 5;
+  double timer = 0;
+  void create_astriod() {
+    add(astroid()
+      ..position = Vector2(Random().nextInt(5) + 50, Random().nextInt(10) + 50)
+      ..vx = Random().nextDouble() * 2
+      ..vy = Random().nextDouble() * 2);
+    if (scoreBoard.score > 2) {
+      double doom = scoreBoard.score / 2;
+      for (int i = 0; i < doom; i++) {
+        add(astroid()
+          ..position =
+              Vector2(Random().nextInt(5) + 50, Random().nextInt(10) + 50)
+          ..vx = Random().nextDouble() * 2
+          ..vy = Random().nextDouble() * 2);
+      }
+    }
+  }
+
   //Called every update with the deltatime between it and the last update
   @override
   void update(double dt) {
     super.update(dt);
+
+    timer += dt;
+    if (timer > timeToCreateAstroid) {
+      create_astriod();
+      timer = 0;
+      print('Print');
+    }
     //Just using this for the key inputs
     if (RawKeyboard.instance.keysPressed.contains(LogicalKeyboardKey.keyA)) {
       player.left = true;
