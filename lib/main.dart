@@ -21,7 +21,8 @@ import 'classes/Background.dart';
 import 'classes/Endpoint.dart';
 import 'components/StartComponent.dart';
 
-class SpaceShooterGame extends FlameGame with HasCollisionDetection, KeyboardEvents {
+class SpaceShooterGame extends FlameGame
+    with HasCollisionDetection, KeyboardEvents {
   //Declare variables
   late SpaceShip player;
   late EndPoint endPoint;
@@ -37,16 +38,18 @@ class SpaceShooterGame extends FlameGame with HasCollisionDetection, KeyboardEve
   //Increase the display on the scoreboard
   void increaseScore() {
     scoreBoard.score++;
-    
-
-    
+    for (int i = 0; i < scoreBoard.score; i++) {
+      add(astroid()
+        ..position = Vector2(
+            Random(400).nextDouble() * 200, Random(400).nextDouble() * 200)
+        ..vx = Random(100).nextDouble() * 2
+        ..vy = Random(100).nextDouble() * 2);
+    }
     pauseEngine();
-    
   }
 
-
   //Key events
-    @override
+  @override
   KeyEventResult onKeyEvent(
     RawKeyEvent event,
     Set<LogicalKeyboardKey> keysPressed,
@@ -56,12 +59,11 @@ class SpaceShooterGame extends FlameGame with HasCollisionDetection, KeyboardEve
     final isSpace = keysPressed.contains(LogicalKeyboardKey.space);
 
     if (isSpace && isKeyDown) {
-      if(paused)paused=false;
+      if (paused) paused = false;
       return KeyEventResult.handled;
     }
     return KeyEventResult.ignored;
   }
-
 
   //Called once when the game starts - Used to load everything
   @override
@@ -134,17 +136,13 @@ class SpaceShooterGame extends FlameGame with HasCollisionDetection, KeyboardEve
   }
 }
 
-
-
-
-
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   //This sets it up for mobile devices to be landscape and full screen
   Flame.device.setLandscape();
   Flame.device.fullScreen();
- 
+
   //runApp(GameWidget(game: SpaceShooterGame()));
   runApp(const MaterialApp(
     title: 'Navigation Basics',
@@ -152,5 +150,3 @@ void main() {
   ));
   //runApp(GameWidget(game: SpaceShooterGame()));
 }
-
- 
