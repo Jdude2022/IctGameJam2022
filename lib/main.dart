@@ -118,7 +118,8 @@ class SpaceShooterGame extends FlameGame
       ..height = 10);
 
     //  camera.followComponent(player);
-    FlameAudio.loop("backgroundmusic.wav");
+    FlameAudio.bgm.initialize();
+    FlameAudio.bgm.play("backgroundmusic.wav");
   }
 
   double timeToCreateAstroid = Random().nextInt(4) + 5;
@@ -196,8 +197,6 @@ class SpaceShooterGame extends FlameGame
         add(buildAsteroid());
       }
     }
-
- 
   }
 
   //Called every update with the deltatime between it and the last update
