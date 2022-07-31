@@ -21,7 +21,8 @@ import 'classes/Background.dart';
 import 'classes/Endpoint.dart';
 import 'components/StartComponent.dart';
 
-class SpaceShooterGame extends FlameGame with HasCollisionDetection, KeyboardEvents {
+class SpaceShooterGame extends FlameGame
+    with HasCollisionDetection, KeyboardEvents {
   //Declare variables
   late SpaceShip player;
   late EndPoint endPoint;
@@ -37,12 +38,10 @@ class SpaceShooterGame extends FlameGame with HasCollisionDetection, KeyboardEve
   //Increase the display on the scoreboard
   void increaseScore() {
     scoreBoard.score++;
-    
   }
 
-
   //Key events
-    @override
+  @override
   KeyEventResult onKeyEvent(
     RawKeyEvent event,
     Set<LogicalKeyboardKey> keysPressed,
@@ -52,7 +51,7 @@ class SpaceShooterGame extends FlameGame with HasCollisionDetection, KeyboardEve
     final isSpace = keysPressed.contains(LogicalKeyboardKey.space);
 
     if (isSpace && isKeyDown) {
-      if(paused) {
+      if (paused) {
         //Restart the game
 
         overlays.remove("PauseMenu");
@@ -62,13 +61,12 @@ class SpaceShooterGame extends FlameGame with HasCollisionDetection, KeyboardEve
         player.vx = 0;
         player.vy = 0;
 
-        paused=false;
+        paused = false;
       }
       return KeyEventResult.handled;
     }
     return KeyEventResult.ignored;
   }
-
 
   //Called once when the game starts - Used to load everything
   @override
@@ -113,10 +111,36 @@ class SpaceShooterGame extends FlameGame with HasCollisionDetection, KeyboardEve
     //  camera.followComponent(player);
   }
 
+  double timeToCreateAstroid = 5;
+  double timer = 0;
+  void create_astriod() {
+    add(astroid()
+      ..position = Vector2(Random().nextInt(5) + 50, Random().nextInt(10) + 50)
+      ..vx = Random().nextDouble() * 2
+      ..vy = Random().nextDouble() * 2);
+    if (scoreBoard.score > 2) {
+      double doom = scoreBoard.score / 2;
+      for (int i = 0; i < doom; i++) {
+        add(astroid()
+          ..position =
+              Vector2(Random().nextInt(5) + 50, Random().nextInt(10) + 50)
+          ..vx = Random().nextDouble() * 2
+          ..vy = Random().nextDouble() * 2);
+      }
+    }
+  }
+
   //Called every update with the deltatime between it and the last update
   @override
   void update(double dt) {
     super.update(dt);
+
+    timer += dt;
+    if (timer > timeToCreateAstroid) {
+      create_astriod();
+      timer = 0;
+      print('Print');
+    }
     //Just using this for the key inputs
     if (RawKeyboard.instance.keysPressed.contains(LogicalKeyboardKey.keyA)) {
       player.left = true;
@@ -141,25 +165,17 @@ class SpaceShooterGame extends FlameGame with HasCollisionDetection, KeyboardEve
   }
 }
 
-
-
-
-
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   //This sets it up for mobile devices to be landscape and full screen
   Flame.device.setLandscape();
   Flame.device.fullScreen();
- 
+
   //runApp(GameWidget(game: SpaceShooterGame()));
   runApp(const MaterialApp(
     title: 'Navigation Basics',
     home: StartScreen(),
   ));
   //runApp(GameWidget(game: SpaceShooterGame()));
-
-
 }
-
- 
