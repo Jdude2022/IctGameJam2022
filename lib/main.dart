@@ -63,8 +63,7 @@ class SpaceShooterGame extends FlameGame
         player.vy = 0;
 
         paused = false;
-      }
-      else {
+      } else {
         FlameAudio.play("sound_test.mp3");
       }
       return KeyEventResult.handled;
@@ -115,15 +114,15 @@ class SpaceShooterGame extends FlameGame
     //  camera.followComponent(player);
   }
 
-  double timeToCreateAstroid = 5;
+  double timeToCreateAstroid = Random().nextInt(4) + 5;
   double timer = 0;
   void create_astriod() {
     add(astroid()
       ..position = Vector2(Random().nextInt(5) + 50, Random().nextInt(10) + 50)
       ..vx = Random().nextDouble() * 2
       ..vy = Random().nextDouble() * 2);
-    if (scoreBoard.score > 2) {
-      double doom = scoreBoard.score / 2;
+    if (scoreBoard.score > 3) {
+      double doom = scoreBoard.score / 4;
       for (int i = 0; i < doom; i++) {
         add(astroid()
           ..position =
