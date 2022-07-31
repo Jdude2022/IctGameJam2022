@@ -62,10 +62,15 @@ class SpaceShooterGame extends FlameGame
         player.vx = 0;
         player.vy = 0;
 
+        children.removeWhere((element) => element is astroid);
+
         paused = false;
+
       } else {
-        //    FlameAudio.play("sound_test.mp3");
+            FlameAudio.play("sound_test.mp3");
+
       }
+
       return KeyEventResult.handled;
     }
     return KeyEventResult.ignored;
@@ -131,6 +136,8 @@ class SpaceShooterGame extends FlameGame
           ..vy = Random().nextDouble() * 2);
       }
     }
+
+
   }
 
   //Called every update with the deltatime between it and the last update
