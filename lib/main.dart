@@ -1,4 +1,4 @@
-import 'dart:ffi';
+// import 'dart:ffi';
 import 'dart:math';
 
 import 'package:flame/collisions.dart';
@@ -40,6 +40,7 @@ class SpaceShooterGame extends FlameGame
   //Increase the display on the scoreboard
   void increaseScore() {
     scoreBoard.score++;
+    FlameAudio.play("dingadading.mp3");
   }
 
   //Key events
@@ -66,9 +67,8 @@ class SpaceShooterGame extends FlameGame
         removeAll(children.where((element) => element is astroid));
 
         paused = false;
-
       } else {
-            //FlameAudio.play("sound_test.mp3");
+        //FlameAudio.play("sound_test.mp3");
 
       }
 
@@ -124,9 +124,9 @@ class SpaceShooterGame extends FlameGame
   double timer = 0;
 
   astroid buildAsteroid() {
-
     astroid asteroid;
-    Vector2 position = Vector2(Random().nextInt(700)+50, Random().nextInt(500)+50);
+    Vector2 position =
+        Vector2(Random().nextInt(700) + 50, Random().nextInt(500) + 50);
 
     int angle = Random().nextInt(360);
 
@@ -135,16 +135,46 @@ class SpaceShooterGame extends FlameGame
     double vx = cos(angle);
     double vy = sin(angle);
 
-    int distanceAway = Random().nextInt(200)+1300;
+    int distanceAway = Random().nextInt(200) + 1300;
 
-    position.x += vx*distanceAway;
-    position.y += vy*distanceAway;
+    position.x += vx * distanceAway;
+    position.y += vy * distanceAway;
 
-    asteroid = astroid()..position=position
-    ..vx = -vx*moveSpeed
-    ..vy = -vy*moveSpeed;
+    asteroid = astroid()
+      ..position = position
+      ..vx = -vx * moveSpeed
+      ..vy = -vy * moveSpeed;
 
     return asteroid;
+  }
+
+  Bullet buildbullet() {
+    Bullet bullet;
+    Vector2 position =
+        Vector2(Random().nextInt(700) + 50, Random().nextInt(500) + 50);
+
+    int angle = Random().nextInt(360);
+
+    double moveSpeed = Random().nextDouble() * 2;
+
+    double vx = cos(angle);
+    double vy = sin(angle);
+
+    int distanceAway = Random().nextInt(200) + 1300;
+
+    position.x += vx * distanceAway;
+    position.y += vy * distanceAway;
+
+    bullet = Bullet()
+      ..position = position
+      ..vx = -vx * moveSpeed
+      ..vy = -vy * moveSpeed
+      ..spriteFile = "assets/images/enemyShot1.png"
+      ..width = 10
+      ..height = 10
+      ..angle = angle.toDouble() + radians(180);
+
+    return bullet;
   }
 
   void create_astriod() {
@@ -153,6 +183,7 @@ class SpaceShooterGame extends FlameGame
     //   ..vx = Random().nextDouble() * 2
     //   ..vy = Random().nextDouble() * 2);
     add(buildAsteroid());
+    add(buildbullet());
     if (scoreBoard.score > 3) {
       double doom = scoreBoard.score / 4;
       for (int i = 0; i < doom; i++) {
@@ -164,8 +195,6 @@ class SpaceShooterGame extends FlameGame
         add(buildAsteroid());
       }
     }
-
-
   }
 
   //Called every update with the deltatime between it and the last update
