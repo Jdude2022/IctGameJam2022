@@ -29,9 +29,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flame: 1.2.0
+  flame: 1.2.1
   flame_splash_screen: 0.1.0
-  flame_audio: 1.0.0
+  flame_audio: 1.3.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -61,6 +61,7 @@ flutter:
   assets:
     # - assets/images/spaceshipver1.png
     # - assets/images/space_space.png
+    - assets/audio/sound_test.mp3
     - assets/images/
       # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
