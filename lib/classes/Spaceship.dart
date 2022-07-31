@@ -8,6 +8,8 @@ import 'package:flame/flame.dart';
 import 'package:flame/sprite.dart';
 import 'package:gamejam/main.dart';
 
+import 'astroid.dart';
+
 class SpaceShip extends SpriteAnimationComponent
     with HasGameRef<SpaceShooterGame>, CollisionCallbacks {
   SpaceShip() : super(size: Vector2.all(100.0));
@@ -112,6 +114,11 @@ class SpaceShip extends SpriteAnimationComponent
       } else if (other is EndPoint) {
         other.move();
         gameRef.increaseScore();
+      }
+      else if(other is astroid) {
+          gameRef.remove(other);
+          gameRef.overlays.add("PauseMenu"); 
+          gameRef.pauseEngine();
       }
       // else if (other is YourOtherComponent) {
       //   //...
