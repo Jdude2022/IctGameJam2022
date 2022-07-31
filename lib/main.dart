@@ -38,10 +38,6 @@ class SpaceShooterGame extends FlameGame with HasCollisionDetection, KeyboardEve
   void increaseScore() {
     scoreBoard.score++;
     
-
-    
-    pauseEngine();
-    
   }
 
 
@@ -56,7 +52,16 @@ class SpaceShooterGame extends FlameGame with HasCollisionDetection, KeyboardEve
     final isSpace = keysPressed.contains(LogicalKeyboardKey.space);
 
     if (isSpace && isKeyDown) {
-      if(paused)paused=false;
+      if(paused) {
+        //Restart the game
+
+        overlays.remove("PauseMenu");
+        player.position = size / 2;
+        player.angle = radians(45);
+        scoreBoard.score = 0;
+
+        paused=false;
+      }
       return KeyEventResult.handled;
     }
     return KeyEventResult.ignored;
@@ -151,6 +156,8 @@ void main() {
     home: StartScreen(),
   ));
   //runApp(GameWidget(game: SpaceShooterGame()));
+
+
 }
 
  
