@@ -59,6 +59,8 @@ class SpaceShooterGame extends FlameGame with HasCollisionDetection, KeyboardEve
         player.position = size / 2;
         player.angle = radians(45);
         scoreBoard.score = 0;
+        player.vx = 0;
+        player.vy = 0;
 
         paused=false;
       }

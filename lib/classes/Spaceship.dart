@@ -116,6 +116,7 @@ class SpaceShip extends SpriteAnimationComponent
         gameRef.increaseScore();
       }
       else if(other is astroid) {
+          gameRef.remove(other);
           gameRef.overlays.add("PauseMenu"); 
           gameRef.pauseEngine();
       }
