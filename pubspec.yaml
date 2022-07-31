@@ -62,6 +62,7 @@ flutter:
     # - assets/images/spaceshipver1.png
     # - assets/images/space_space.png
     - assets/audio/sound_test.mp3
+    - assets/audio/dingadading.mp3
     - assets/images/
       # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
