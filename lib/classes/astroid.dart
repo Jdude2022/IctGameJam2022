@@ -13,10 +13,12 @@ class astroid extends SpriteAnimationComponent
   astroid() : super(size: Vector2.all(100.0)); // size + 100
   double vx = 0;
   double vy = 0;
+  double distanceTravelled = 0;
 
   SpriteAnimationComponent astroidAnimation = SpriteAnimationComponent();
   final double _animationSpeed = 0.1;
   late final SpriteAnimation _astroidAnimation;
+  int moveSpeed = 50;
 
   @override
   Future<void> onLoad() async {
@@ -39,11 +41,18 @@ class astroid extends SpriteAnimationComponent
         spriteSheet.createAnimation(row: 0, stepTime: _animationSpeed, to: 5);
   }
 
+  void destroy() {
+    gameRef.remove(this);
+  }
+
   @override
   void update(double dt) {
     super.update(dt);
-    position.x += vx * dt * 100;
-    position.y += vy * dt * 100;
-    if (position.x > 500) gameRef.remove(this);
+    double diffX = vx * dt * moveSpeed;
+    double diffY = vy * dt * moveSpeed;
+    position.x += diffX;
+    position.y += diffY;
+    distanceTravelled+=sqrt(diffX*diffX+diffY*diffY);
+    if (distanceTravelled>2200) destroy();
   }
 }

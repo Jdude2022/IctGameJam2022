@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:math';
 
 import 'package:flame/collisions.dart';
@@ -62,7 +63,7 @@ class SpaceShooterGame extends FlameGame
         player.vx = 0;
         player.vy = 0;
 
-        children.removeWhere((element) => element is astroid);
+        removeAll(children.where((element) => element is astroid));
 
         paused = false;
 
@@ -121,19 +122,46 @@ class SpaceShooterGame extends FlameGame
 
   double timeToCreateAstroid = Random().nextInt(4) + 5;
   double timer = 0;
+
+  astroid buildAsteroid() {
+
+    astroid asteroid;
+    Vector2 position = Vector2(Random().nextInt(700)+50, Random().nextInt(500)+50);
+
+    int angle = Random().nextInt(360);
+
+    double moveSpeed = Random().nextDouble() * 2;
+
+    double vx = cos(angle);
+    double vy = sin(angle);
+
+    int distanceAway = Random().nextInt(200)+1300;
+
+    position.x += vx*distanceAway;
+    position.y += vy*distanceAway;
+
+    asteroid = astroid()..position=position
+    ..vx = -vx*moveSpeed
+    ..vy = -vy*moveSpeed;
+
+    return asteroid;
+  }
+
   void create_astriod() {
-    add(astroid()
-      ..position = Vector2(Random().nextInt(5) + 50, Random().nextInt(10) + 50)
-      ..vx = Random().nextDouble() * 2
-      ..vy = Random().nextDouble() * 2);
+    // add(astroid()
+    //   ..position = Vector2(Random().nextInt(5) - 150, Random().nextInt(10) -150)
+    //   ..vx = Random().nextDouble() * 2
+    //   ..vy = Random().nextDouble() * 2);
+    add(buildAsteroid());
     if (scoreBoard.score > 3) {
       double doom = scoreBoard.score / 4;
       for (int i = 0; i < doom; i++) {
-        add(astroid()
-          ..position =
-              Vector2(Random().nextInt(5) + 50, Random().nextInt(10) + 50)
-          ..vx = Random().nextDouble() * 2
-          ..vy = Random().nextDouble() * 2);
+        // add(astroid()
+        //   ..position =
+        //       Vector2(Random().nextInt(5) + 50, Random().nextInt(10) + 50)
+        //   ..vx = Random().nextDouble() * 2
+        //   ..vy = Random().nextDouble() * 2);
+        add(buildAsteroid());
       }
     }
 
